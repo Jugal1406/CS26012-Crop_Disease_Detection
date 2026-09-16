@@ -1,4 +1,4 @@
-from fastapi import FastAPI  # type: ignore[reportMissingImports]
+from fastapi import FastAPI, UploadFile, File, Form  # type: ignore[reportMissingImports]
 from fastapi.middleware.cors import CORSMiddleware  # type: ignore[reportMissingImports]
 
 app = FastAPI()
@@ -15,3 +15,16 @@ app.add_middleware(
 @app.get("/")
 def home():
     return {"message": "Crop Disease Detection API is running"}
+
+
+@app.post("/predict")
+async def predict(
+    crop: str = Form(...),
+    image: UploadFile = File(...)
+):
+    return {
+        "crop": crop,
+        "filename": image.filename,
+        "disease": "Test Disease",
+        "confidence": 95.2
+    }
