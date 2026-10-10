@@ -1,0 +1,564 @@
+/* frontend/src/styles/farms.css */
+/* Styles for Module 12 Farm Profile & Location Management */
+
+.farms-container {
+  min-height: calc(100vh - 80px);
+  padding: 5.5rem clamp(1rem, 4vw, 3rem) 3rem;
+  background: radial-gradient(circle at 50% 10%, #13241a 0%, #08110b 100%);
+  color: #f3efe4;
+  font-family: var(--font-body, "Inter", sans-serif);
+}
+
+.farms-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Header & Banner */
+.farms-banner {
+  background: linear-gradient(135deg, #1d3524 0%, #0d1a12 100%);
+  border: 1px solid rgba(220, 240, 200, 0.15);
+  border-radius: 20px;
+  padding: 2.25rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+  flex-wrap: wrap;
+}
+
+.farms-banner-left {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.farms-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #13241a;
+  border: 2px solid #6fa046;
+  color: #a9d47c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  flex-shrink: 0;
+}
+
+.farms-title {
+  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 600;
+  color: #f3efe4;
+  margin: 0 0 0.35rem 0;
+}
+
+.farms-subtitle {
+  color: rgba(243, 239, 228, 0.72);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.farms-banner-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Primary Button */
+.farms-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #6fa046;
+  color: #08110b;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0.8rem 1.4rem;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 15px rgba(111, 160, 70, 0.35);
+  border: none;
+  cursor: pointer;
+}
+
+.farms-btn-primary:hover {
+  background: #a9d47c;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(111, 160, 70, 0.5);
+}
+
+.farms-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  color: #f3efe4;
+  border: 1px solid rgba(220, 240, 200, 0.2);
+  padding: 0.8rem 1.25rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.farms-btn-secondary:hover {
+  background: rgba(220, 240, 200, 0.08);
+  border-color: rgba(220, 240, 200, 0.35);
+}
+
+/* Farm Form Card */
+.farm-form-card {
+  background: #0d1a12;
+  border: 1px solid rgba(111, 160, 70, 0.3);
+  border-radius: 18px;
+  padding: 2rem;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.farm-form-title {
+  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-size: 1.4rem;
+  color: #f3efe4;
+  margin: 0 0 1.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.farm-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+.farm-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.farm-label {
+  font-size: 0.88rem;
+  color: rgba(243, 239, 228, 0.8);
+  font-weight: 500;
+}
+
+.farm-input {
+  background: #08110b;
+  border: 1px solid rgba(220, 240, 200, 0.18);
+  color: #f3efe4;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease;
+  outline: none;
+}
+
+.farm-input:focus {
+  border-color: #6fa046;
+  box-shadow: 0 0 0 3px rgba(111, 160, 70, 0.2);
+}
+
+/* Geolocation Tool */
+.farm-geo-box {
+  grid-column: 1 / -1;
+  background: rgba(19, 36, 26, 0.6);
+  border: 1px dashed rgba(111, 160, 70, 0.35);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.farm-geo-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.85rem;
+}
+
+.farm-geo-btn {
+  background: rgba(111, 160, 70, 0.18);
+  color: #a9d47c;
+  border: 1px solid rgba(111, 160, 70, 0.4);
+  padding: 0.55rem 1rem;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.farm-geo-btn:hover:not(:disabled) {
+  background: rgba(111, 160, 70, 0.3);
+  border-color: #a9d47c;
+}
+
+.farm-geo-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Farm Cards Grid */
+.farms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.5rem;
+}
+
+.farm-card {
+  background: #0d1a12;
+  border: 1px solid rgba(220, 240, 200, 0.12);
+  border-radius: 18px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.25rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s ease;
+}
+
+.farm-card:hover {
+  border-color: rgba(111, 160, 70, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+.farm-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.farm-card-name {
+  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-size: 1.25rem;
+  color: #f3efe4;
+  margin: 0;
+  font-weight: 600;
+}
+
+.farm-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 16px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.farm-badge--gps {
+  background: rgba(34, 197, 94, 0.15);
+  color: #86efac;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.farm-badge--no-gps {
+  background: rgba(234, 179, 8, 0.12);
+  color: #fde047;
+  border: 1px solid rgba(234, 179, 8, 0.25);
+}
+
+.farm-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-size: 0.92rem;
+}
+
+.farm-card-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dashed rgba(220, 240, 200, 0.08);
+}
+
+.farm-card-term {
+  color: rgba(243, 239, 228, 0.6);
+}
+
+.farm-card-val {
+  color: #f3efe4;
+  font-weight: 500;
+  text-align: right;
+}
+
+.farm-card-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(220, 240, 200, 0.08);
+}
+
+.farm-action-btn {
+  flex: 1;
+  padding: 0.55rem 0.85rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.farm-action-btn--edit {
+  background: rgba(111, 160, 70, 0.15);
+  color: #a9d47c;
+  border-color: rgba(111, 160, 70, 0.3);
+}
+
+.farm-action-btn--edit:hover {
+  background: rgba(111, 160, 70, 0.3);
+}
+
+.farm-action-btn--deactivate {
+  background: rgba(239, 68, 68, 0.12);
+  color: #fca5a5;
+  border-color: rgba(239, 68, 68, 0.25);
+}
+
+.farm-action-btn--deactivate:hover {
+  background: rgba(239, 68, 68, 0.22);
+}
+
+/* Empty State */
+.farms-empty-state {
+  background: #0d1a12;
+  border: 1px dashed rgba(220, 240, 200, 0.18);
+  border-radius: 18px;
+  padding: 4rem 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.farms-empty-icon {
+  font-size: 3.5rem;
+  opacity: 0.8;
+}
+
+.farms-empty-title {
+  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-size: 1.5rem;
+  color: #f3efe4;
+  margin: 0;
+}
+
+.farms-empty-desc {
+  color: rgba(243, 239, 228, 0.65);
+  max-width: 480px;
+  font-size: 0.95rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   MODULE 13: Farm Weather Widget Styles
+   ========================================================================== */
+.farm-weather-card {
+  margin-top: 1rem;
+  background: rgba(13, 26, 18, 0.7);
+  border: 1px solid rgba(169, 212, 124, 0.2);
+  border-radius: 12px;
+  padding: 1rem 1.15rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: border-color 0.2s ease;
+}
+
+.farm-weather-card:hover {
+  border-color: rgba(169, 212, 124, 0.35);
+}
+
+.farm-weather-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(220, 240, 200, 0.08);
+}
+
+.farm-weather-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #f3efe4;
+}
+
+.farm-weather-source-badge {
+  font-size: 0.72rem;
+  background: rgba(111, 160, 70, 0.2);
+  color: #a9d47c;
+  padding: 0.15rem 0.5rem;
+  border-radius: 10px;
+  font-weight: 500;
+  border: 1px solid rgba(111, 160, 70, 0.3);
+}
+
+.farm-weather-refresh-btn {
+  background: transparent;
+  border: 1px solid rgba(220, 240, 200, 0.2);
+  color: #a9d47c;
+  border-radius: 8px;
+  padding: 0.3rem 0.65rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.2s ease;
+}
+
+.farm-weather-refresh-btn:hover:not(:disabled) {
+  background: rgba(111, 160, 70, 0.2);
+  border-color: #a9d47c;
+}
+
+.farm-weather-refresh-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.farm-weather-condition-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.85rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(19, 36, 26, 0.6);
+  border-radius: 8px;
+}
+
+.farm-weather-condition-left {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.farm-weather-icon {
+  font-size: 1.6rem;
+}
+
+.farm-weather-cond-text {
+  font-weight: 600;
+  color: #f3efe4;
+  font-size: 0.92rem;
+}
+
+.farm-weather-cache-tag {
+  font-size: 0.72rem;
+  color: rgba(243, 239, 228, 0.6);
+}
+
+.farm-weather-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.6rem;
+}
+
+@media (max-width: 600px) {
+  .farm-weather-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.farm-weather-metric-tile {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(220, 240, 200, 0.08);
+  border-radius: 8px;
+  padding: 0.55rem 0.5rem;
+  text-align: center;
+}
+
+.farm-weather-metric-label {
+  font-size: 0.72rem;
+  color: rgba(243, 239, 228, 0.6);
+  margin-bottom: 0.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.farm-weather-metric-val {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #a9d47c;
+}
+
+.farm-weather-no-gps-box {
+  margin-top: 1rem;
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px dashed rgba(245, 158, 11, 0.3);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.farm-weather-no-gps-text {
+  font-size: 0.82rem;
+  color: #fde68a;
+  line-height: 1.4;
+}
+
+.farm-weather-no-gps-btn {
+  background: rgba(245, 158, 11, 0.2);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  color: #fde68a;
+  border-radius: 6px;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.farm-weather-no-gps-btn:hover {
+  background: rgba(245, 158, 11, 0.35);
+}
+
+.farm-weather-loading {
+  font-size: 0.85rem;
+  color: rgba(243, 239, 228, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1.25rem 0;
+}

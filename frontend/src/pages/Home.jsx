@@ -1,51 +1,38 @@
-import { Link } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import Hero from "../components/Hero";
+import PlantJourney from "../components/PlantJourney";
+import HowItWorks from "../components/HowItWorks";
+import CropCards from "../components/CropCards";
+import Technology from "../components/Technology";
+import DemoSection from "../components/DemoSection";
+import FinalCTA from "../components/FinalCTA";
+import Footer from "../components/Footer";
+import { useTranslation } from "../context/LanguageContext";
+import "../styles/landing.css";
 
 function Home() {
+  const { t } = useTranslation();
+
   return (
-    <div>
-      <nav>
-        <h2>Crop Disease Detection</h2>
-
-        <div>
-          <Link to="/">Home</Link>
-          {" | "}
-          <Link to="/login">Login</Link>
-        </div>
-      </nav>
-
-      <main>
-        <h1>Detect Crop Diseases Easily</h1>
-
-        <p>
-          Upload an image of a crop leaf and get a disease prediction
-          with a confidence score.
-        </p>
-
-        <Link to="/diagnose">
-          <button>Start Diagnosis</button>
-        </Link>
+    <div className="landing">
+      <a href="#main" className="lp-skip">
+        {t("landing.skipToContent", "Skip to content")}
+      </a>
+      <Navbar />
+      <main id="main">
+        <Hero />
+        <PlantJourney />
+        <HowItWorks />
+        <CropCards />
+        <Technology />
+        <DemoSection />
+        <FinalCTA />
       </main>
-
-      <section>
-        <h2>Supported Crops</h2>
-
-        <div>
-          <h3>🥔 Potato</h3>
-          <p>Upload a potato leaf image for disease detection.</p>
-        </div>
-
-        <div>
-          <h3>🥜 Groundnut</h3>
-          <p>Upload a groundnut leaf image for disease detection.</p>
-        </div>
-
-        <div>
-          <h3>🌶️ Chili</h3>
-          <p>Upload a chili leaf image for disease detection.</p>
-        </div>
-      </section>
+      <Footer />
     </div>
   );
 }
 
-export default Home;
+export default function HomePage() {
+  return <Home />;
+}

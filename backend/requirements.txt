@@ -1,0 +1,34 @@
+# backend/requirements.txt
+# ========================
+# Backend dependencies for the Crop Disease Detection API.
+# Install with: pip install -r requirements.txt
+#
+# Pin minor versions to ensure reproducibility.
+# Update intentionally — do not auto-upgrade without testing model compatibility.
+
+# --- Web framework ---
+fastapi==0.142.2
+uvicorn==0.54.0
+python-multipart==0.0.32   # Required for multipart/form-data (file uploads)
+httpx>=0.27.0              # Async HTTP client for external APIs & test clients
+
+# --- Machine learning ---
+tensorflow==2.21.0          # Must match or be compatible with the trained model version (2.20.0)
+numpy>=1.26.0               # Required by TF 2.21; numpy 2.x is supported
+
+# --- Image processing ---
+Pillow==12.3.0              # Used for image decoding, center-crop, and resize
+
+# --- Module 7: PostgreSQL database layer ---
+sqlalchemy==2.0.36          # Async ORM; defines all 9 table models in models.py
+alembic==1.14.0             # Schema migration tool; migrations in alembic/versions/
+asyncpg==0.30.0             # Async PostgreSQL driver used by SQLAlchemy + asyncpg
+psycopg2-binary==2.9.10    # Sync PostgreSQL driver (used by Alembic CLI internally)
+python-dotenv==1.0.1        # Loads DB credentials from backend/.env
+
+# --- Module 9: Authentication & Clerk Session Verification ---
+PyJWT>=2.8.0
+cryptography>=42.0.0
+
+# --- Module 17: PDF Report Generation ---
+reportlab==5.0.1

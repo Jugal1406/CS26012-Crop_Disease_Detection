@@ -1,0 +1,534 @@
+/* frontend/src/styles/dashboard.css */
+/* Styles for Authenticated Personalized Farmer Dashboard */
+
+.dash-container {
+  min-height: calc(100vh - 80px);
+  padding: 5.5rem clamp(1rem, 4vw, 3rem) 3rem;
+  background: radial-gradient(circle at 50% 10%, #13241a 0%, #08110b 100%);
+  color: #f3efe4;
+  font-family: var(--font-body, "Inter", sans-serif);
+}
+
+.dash-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Header & Welcome Banner */
+.dash-banner {
+  background: linear-gradient(135deg, #1d3524 0%, #0d1a12 100%);
+  border: 1px solid rgba(220, 240, 200, 0.15);
+  border-radius: 20px;
+  padding: 2.25rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+  flex-wrap: wrap;
+}
+
+.dash-banner-left {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.dash-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #13241a;
+  border: 2px solid #6fa046;
+  color: #a9d47c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  flex-shrink: 0;
+}
+
+.dash-greeting-title {
+  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 600;
+  color: #f3efe4;
+  margin: 0 0 0.35rem 0;
+}
+
+.dash-greeting-subtitle {
+  color: rgba(243, 239, 228, 0.72);
+  font-size: 0.95rem;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.dash-badge-active {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(111, 160, 70, 0.2);
+  color: #a9d47c;
+  border: 1px solid rgba(111, 160, 70, 0.4);
+  padding: 0.2rem 0.65rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.dash-banner-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.dash-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #6fa046;
+  color: #08110b;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 15px rgba(111, 160, 70, 0.35);
+  border: none;
+  cursor: pointer;
+}
+
+.dash-cta-btn:hover {
+  background: #a9d47c;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(111, 160, 70, 0.5);
+}
+
+/* Sub-Navigation Bar */
+.dash-nav {
+  display: flex;
+  background: #0d1a12;
+  border: 1px solid rgba(220, 240, 200, 0.1);
+  border-radius: 14px;
+  padding: 0.4rem;
+  gap: 0.4rem;
+  overflow-x: auto;
+}
+
+.dash-nav-btn {
+  background: transparent;
+  border: none;
+  color: rgba(243, 239, 228, 0.65);
+  padding: 0.65rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.dash-nav-btn:hover {
+  color: #f3efe4;
+  background: rgba(220, 240, 200, 0.05);
+}
+
+.dash-nav-btn.active {
+  background: #1d3524;
+  color: #a9d47c;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Stats Row */
+.dash-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+.dash-stat-card {
+  background: #0d1a12;
+  border: 1px solid rgba(220, 240, 200, 0.12);
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.dash-stat-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(220, 240, 200, 0.22);
+}
+
+.dash-stat-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.dash-stat-icon--green {
+  background: rgba(111, 160, 70, 0.15);
+  color: #a9d47c;
+  border: 1px solid rgba(111, 160, 70, 0.25);
+}
+
+.dash-stat-icon--emerald {
+  background: rgba(34, 197, 94, 0.15);
+  color: #86efac;
+  border: 1px solid rgba(34, 197, 94, 0.25);
+}
+
+.dash-stat-icon--amber {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fcd34d;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.dash-stat-icon--blue {
+  background: rgba(59, 130, 246, 0.15);
+  color: #93c5fd;
+  border: 1px solid rgba(59, 130, 246, 0.25);
+}
+
+.dash-stat-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #f3efe4;
+  line-height: 1.2;
+}
+
+.dash-stat-label {
+  font-size: 0.85rem;
+  color: rgba(243, 239, 228, 0.65);
+  margin-top: 0.2rem;
+}
+
+/* Two-Column Layout */
+.dash-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .dash-grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Card Boxes */
+.dash-card {
+  background: #0d1a12;
+  border: 1px solid rgba(220, 240, 200, 0.12);
+  border-radius: 18px;
+  padding: 1.75rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.dash-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid rgba(220, 240, 200, 0.08);
+}
+
+.dash-card-title {
+  font-family: var(--font-display, "Fraunces", Georgia, serif);
+  font-size: 1.25rem;
+  color: #f3efe4;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.dash-card-subtitle {
+  font-size: 0.85rem;
+  color: rgba(243, 239, 228, 0.55);
+}
+
+/* Info list inside cards */
+.dash-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.dash-info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0;
+  border-bottom: 1px dashed rgba(220, 240, 200, 0.08);
+  font-size: 0.92rem;
+}
+
+.dash-info-item:last-child {
+  border-bottom: none;
+}
+
+.dash-info-term {
+  color: rgba(243, 239, 228, 0.6);
+}
+
+.dash-info-val {
+  color: #f3efe4;
+  font-weight: 500;
+  text-align: right;
+}
+
+/* Weather Card Placeholder */
+.dash-weather-box {
+  background: linear-gradient(135deg, rgba(30, 58, 138, 0.2) 0%, rgba(13, 26, 18, 0.6) 100%);
+  border: 1px solid rgba(147, 197, 253, 0.2);
+  border-radius: 14px;
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.dash-weather-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.dash-weather-icon {
+  font-size: 2.2rem;
+}
+
+.dash-weather-station {
+  font-weight: 600;
+  color: #93c5fd;
+  font-size: 1rem;
+}
+
+.dash-weather-note {
+  font-size: 0.8rem;
+  color: rgba(243, 239, 228, 0.6);
+  margin-top: 0.2rem;
+}
+
+/* Crop Pills */
+.dash-crops-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.dash-crop-pill {
+  background: #08110b;
+  border: 1px solid rgba(220, 240, 200, 0.15);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.dash-crop-pill--active {
+  border-color: #6fa046;
+  background: rgba(111, 160, 70, 0.1);
+}
+
+.dash-crop-pill-status {
+  font-size: 0.75rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.dash-crop-pill-status--ready {
+  background: rgba(34, 197, 94, 0.2);
+  color: #86efac;
+}
+
+.dash-crop-pill-status--soon {
+  background: rgba(234, 179, 8, 0.2);
+  color: #fde047;
+}
+
+/* Tables & Lists */
+.dash-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.dash-table th {
+  text-align: left;
+  padding: 0.75rem 0.85rem;
+  color: rgba(243, 239, 228, 0.55);
+  font-weight: 500;
+  border-bottom: 1px solid rgba(220, 240, 200, 0.1);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.dash-table td {
+  padding: 0.85rem;
+  border-bottom: 1px solid rgba(220, 240, 200, 0.05);
+  color: #f3efe4;
+}
+
+.dash-table tr:hover td {
+  background: rgba(220, 240, 200, 0.03);
+}
+
+.dash-tag {
+  display: inline-block;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.dash-tag--healthy {
+  background: rgba(34, 197, 94, 0.2);
+  color: #86efac;
+}
+
+.dash-tag--issue {
+  background: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+}
+
+.dash-empty-state {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: rgba(243, 239, 228, 0.5);
+}
+
+.dash-empty-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.7;
+}
+
+.dash-empty-text {
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+/* ==========================================================================
+   MODULE 13: Dashboard Agro-Weather Widget Styles
+   ========================================================================== */
+.dash-weather-card {
+  background: linear-gradient(135deg, #13241a 0%, #0d1a12 100%);
+  border: 1px solid rgba(169, 212, 124, 0.25);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.dash-weather-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid rgba(220, 240, 200, 0.1);
+}
+
+.dash-weather-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.dash-weather-icon-badge {
+  font-size: 2rem;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(111, 160, 70, 0.15);
+  border: 1px solid rgba(111, 160, 70, 0.3);
+  border-radius: 12px;
+}
+
+.dash-weather-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #f3efe4;
+  margin: 0 0 0.2rem 0;
+}
+
+.dash-weather-subtitle {
+  font-size: 0.82rem;
+  color: rgba(243, 239, 228, 0.65);
+}
+
+.dash-weather-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.dash-weather-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .dash-weather-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.dash-weather-tile {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(220, 240, 200, 0.08);
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.dash-weather-tile-label {
+  font-size: 0.8rem;
+  color: rgba(243, 239, 228, 0.6);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.dash-weather-tile-val {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #a9d47c;
+}
+
+.dash-weather-tile-sub {
+  font-size: 0.75rem;
+  color: rgba(243, 239, 228, 0.5);
+}

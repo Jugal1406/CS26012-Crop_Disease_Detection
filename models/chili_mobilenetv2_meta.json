@@ -1,0 +1,16 @@
+{
+  "crop": "chili",
+  "arch": "MobileNetV2",
+  "framework": "tensorflow 2.20.0",
+  "class_names": [
+    "Bacterial Spot",
+    "Cercospora Leaf Spot",
+    "Curl Virus",
+    "Healthy Leaf",
+    "Nutrition Deficiency",
+    "White spot"
+  ],
+  "img_size": 224,
+  "input": "RGB, float32, pixel values 0-255, shape (1, 224, 224, 3); the model rescales internally",
+  "resize": "center-crop to a square, then resize to img_size (bilinear)"
+}

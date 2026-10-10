@@ -1,0 +1,237 @@
+{
+  "crop": "chili",
+  "arch": "MobileNetV2",
+  "framework": "tensorflow 2.20.0",
+  "class_names": [
+    "Bacterial Spot",
+    "Cercospora Leaf Spot",
+    "Curl Virus",
+    "Healthy Leaf",
+    "Nutrition Deficiency",
+    "White spot"
+  ],
+  "img_size": 224,
+  "input": "RGB, float32, pixel values 0-255, shape (1, 224, 224, 3); the model rescales internally",
+  "resize": "center-crop to a square, then resize to img_size (bilinear)",
+  "trained_at": "2026-10-03T17:14:25",
+  "seed": 42,
+  "split": [
+    0.7,
+    0.15,
+    0.15
+  ],
+  "dup_threshold": 5,
+  "batch_size": 32,
+  "head_epochs": 15,
+  "head_lr": 0.001,
+  "finetune_epochs": 0,
+  "finetune_lr": 1e-05,
+  "images_original": 1856,
+  "images_clean": 1442,
+  "images_removed": 414,
+  "split_counts": {
+    "test": {
+      "Bacterial Spot": 17,
+      "Cercospora Leaf Spot": 25,
+      "Curl Virus": 47,
+      "Healthy Leaf": 48,
+      "Nutrition Deficiency": 53,
+      "White spot": 24
+    },
+    "train": {
+      "Bacterial Spot": 83,
+      "Cercospora Leaf Spot": 118,
+      "Curl Virus": 223,
+      "Healthy Leaf": 227,
+      "Nutrition Deficiency": 251,
+      "White spot": 112
+    },
+    "valid": {
+      "Bacterial Spot": 17,
+      "Cercospora Leaf Spot": 25,
+      "Curl Virus": 47,
+      "Healthy Leaf": 48,
+      "Nutrition Deficiency": 53,
+      "White spot": 24
+    }
+  },
+  "class_weight": {
+    "Bacterial Spot": 2.036,
+    "Cercospora Leaf Spot": 1.432,
+    "Curl Virus": 0.758,
+    "Healthy Leaf": 0.744,
+    "Nutrition Deficiency": 0.673,
+    "White spot": 1.509
+  },
+  "best_epoch": 9,
+  "best_val_acc": 0.9392523169517517,
+  "test_acc": 0.8785046728971962,
+  "train_time_s": 46.1,
+  "history": {
+    "accuracy": [
+      0.49309664964675903,
+      0.807692289352417,
+      0.8885601758956909,
+      0.9151873588562012,
+      0.9102563858032227,
+      0.9211045503616333,
+      0.9201183319091797,
+      0.9260355234146118,
+      0.9368836283683777,
+      0.9487179517745972,
+      0.959566056728363,
+      0.9526627063751221,
+      0.966469407081604,
+      0.9546350836753845
+    ],
+    "loss": [
+      1.4307279586791992,
+      0.6183969974517822,
+      0.4499266743659973,
+      0.33064600825309753,
+      0.30186042189598083,
+      0.2645813822746277,
+      0.25296109914779663,
+      0.2480355203151703,
+      0.22255416214466095,
+      0.1799316108226776,
+      0.17110341787338257,
+      0.17468011379241943,
+      0.15258073806762695,
+      0.16652825474739075
+    ],
+    "val_accuracy": [
+      0.7850467562675476,
+      0.8457943797111511,
+      0.9018691778182983,
+      0.9205607771873474,
+      0.9345794320106506,
+      0.9345794320106506,
+      0.9299065470695496,
+      0.9299065470695496,
+      0.9392523169517517,
+      0.9392523169517517,
+      0.9392523169517517,
+      0.9345794320106506,
+      0.9392523169517517,
+      0.9252336621284485
+    ],
+    "val_loss": [
+      0.6955613493919373,
+      0.47270387411117554,
+      0.355182945728302,
+      0.27908769249916077,
+      0.2364497184753418,
+      0.23711378872394562,
+      0.20747704803943634,
+      0.21563006937503815,
+      0.21560654044151306,
+      0.1818150281906128,
+      0.17134296894073486,
+      0.1777336746454239,
+      0.17592167854309082,
+      0.18294289708137512
+    ]
+  },
+  "test_report": {
+    "Bacterial Spot": {
+      "precision": 0.6086956521739131,
+      "recall": 0.8235294117647058,
+      "f1-score": 0.7,
+      "support": 17.0
+    },
+    "Cercospora Leaf Spot": {
+      "precision": 0.9166666666666666,
+      "recall": 0.88,
+      "f1-score": 0.8979591836734694,
+      "support": 25.0
+    },
+    "Curl Virus": {
+      "precision": 1.0,
+      "recall": 0.8297872340425532,
+      "f1-score": 0.9069767441860465,
+      "support": 47.0
+    },
+    "Healthy Leaf": {
+      "precision": 0.9555555555555556,
+      "recall": 0.8958333333333334,
+      "f1-score": 0.9247311827956989,
+      "support": 48.0
+    },
+    "Nutrition Deficiency": {
+      "precision": 0.7903225806451613,
+      "recall": 0.9245283018867925,
+      "f1-score": 0.8521739130434782,
+      "support": 53.0
+    },
+    "White spot": {
+      "precision": 1.0,
+      "recall": 0.875,
+      "f1-score": 0.9333333333333333,
+      "support": 24.0
+    },
+    "accuracy": 0.8785046728971962,
+    "macro avg": {
+      "precision": 0.8785400758402161,
+      "recall": 0.8714463801712308,
+      "f1-score": 0.8691957261720044,
+      "support": 214.0
+    },
+    "weighted avg": {
+      "precision": 0.8972815710022589,
+      "recall": 0.8785046728971962,
+      "f1-score": 0.8828467324022374,
+      "support": 214.0
+    }
+  },
+  "confusion_matrix": [
+    [
+      14,
+      0,
+      0,
+      1,
+      2,
+      0
+    ],
+    [
+      3,
+      22,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      2,
+      39,
+      0,
+      4,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      43,
+      5,
+      0
+    ],
+    [
+      4,
+      0,
+      0,
+      0,
+      49,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      1,
+      2,
+      21
+    ]
+  ]
+}
