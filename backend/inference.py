@@ -46,11 +46,29 @@ logger = logging.getLogger(__name__)
 MODELS_DIR: Path = Path(__file__).parent.parent / "models"
 
 # Maps the crop identifier (what the frontend sends) to the model file stem.
-# To add a new crop: add one entry here and place the model files in models/.
 CROP_MODEL_FILES: dict[str, str] = {
     "chili": "chili_mobilenetv2",
-    # "potato":    "potato_mobilenetv2",    # Uncomment when model is available
-    # "groundnut": "groundnut_mobilenetv2", # Uncomment when model is available
+    "groundnut": "groundnut_mobilenetv2_model_2",
+    "potato": "potato_mobilenetv2",
+}
+
+# Full-form / human-friendly display mappings for model class labels.
+# Specifically, Potato dataset classes "EB" and "LB" correspond to Early Blight and Late Blight.
+# Groundnut dataset classes use snake_case identifiers which map to standard pathology names.
+CLASS_NAME_FULL_FORMS: dict[str, dict[str, str]] = {
+    "potato": {
+        "EB": "Early Blight",
+        "Healthy": "Healthy",
+        "LB": "Late Blight",
+    },
+    "groundnut": {
+        "groundnut_early_leaf_spot": "Early Leaf Spot",
+        "groundnut_early_rust": "Early Rust",
+        "groundnut_healthy": "Healthy Leaf",
+        "groundnut_late_leaf_spot": "Late Leaf Spot",
+        "groundnut_nutrition_deficiency": "Nutrition Deficiency",
+        "groundnut_rust": "Rust",
+    },
 }
 
 # Maximum accepted upload size to prevent abuse / memory exhaustion.
@@ -204,24 +222,30 @@ def _load_single_model(crop: str) -> None:
             f"Failed to parse metadata JSON for crop '{crop}': {exc}"
         ) from exc
 
-    class_names: list[str] = meta.get("class_names", [])
+    raw_class_names: list[str] = meta.get("class_names", [])
     img_size: int = meta.get("img_size", 224)
 
-    if not class_names:
+    if not raw_class_names:
         raise ModelLoadError(
             f"Metadata for crop '{crop}' contains no class_names."
         )
 
+    # Resolve full forms for abbreviations (e.g. EB -> Early Blight, LB -> Late Blight)
+    full_forms = CLASS_NAME_FULL_FORMS.get(crop, {})
+    class_names = [full_forms.get(name, name) for name in raw_class_names]
+
     _REGISTRY[crop] = {
         "model": model,
         "class_names": class_names,
+        "raw_class_names": raw_class_names,
         "img_size": img_size,
     }
 
     logger.info(
-        "Model '%s' loaded successfully. Classes: %s. Input size: %d×%d.",
+        "Model '%s' loaded successfully. Classes: %s (Raw: %s). Input size: %d×%d.",
         crop,
         class_names,
+        raw_class_names,
         img_size,
         img_size,
     )
@@ -368,6 +392,7 @@ def predict(crop: str, image_bytes: bytes) -> dict[str, Any]:
     # ------------------------------------------------------------------
     model = entry["model"]
     class_names: list[str] = entry["class_names"]
+    raw_class_names: list[str] = entry.get("raw_class_names", class_names)
 
     # model.predict() returns shape (1, num_classes) — softmax probabilities.
     # verbose=0 suppresses the per-batch progress bar.
@@ -381,13 +406,18 @@ def predict(crop: str, image_bytes: bytes) -> dict[str, Any]:
 
     sorted_indices = np.argsort(probs)[::-1]
     all_probs = [
-        {"class": class_names[int(i)], "confidence": round(float(probs[i]), 6)}
+        {
+            "class": class_names[int(i)],
+            "raw_class": raw_class_names[int(i)],
+            "confidence": round(float(probs[i]), 6),
+        }
         for i in sorted_indices
     ]
 
     return {
         "crop": crop,
         "disease": class_names[top_idx],
+        "raw_disease": raw_class_names[top_idx],
         "confidence": round(top_confidence, 6),
         "all_probs": all_probs,
     }

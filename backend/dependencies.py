@@ -37,7 +37,8 @@ def get_bearer_token(authorization: Optional[str] = Header(None)) -> str:
 
 
 # Alias for test suite compatibility
-verify_firebase_id_token = verify_clerk_token
+def verify_firebase_id_token(token: str):
+    return verify_clerk_token(token)
 
 
 async def get_current_user(

@@ -51,6 +51,7 @@ class UserRepository(BaseRepository[User]):
         email: Optional[str] = None,
         phone_number: Optional[str] = None,
         preferred_language: str = "en",
+        fallback_display_name: Optional[str] = None,
     ) -> User:
         """
         Synchronize an authenticated Clerk user with PostgreSQL.
@@ -69,27 +70,35 @@ class UserRepository(BaseRepository[User]):
 
         if user:
             updated = False
+            # If explicit display_name was provided by caller, update it
             if display_name and display_name.strip() and user.display_name != display_name.strip():
                 user.display_name = display_name.strip()
                 updated = True
+            elif not user.display_name and fallback_display_name and fallback_display_name.strip():
+                user.display_name = fallback_display_name.strip()
+                updated = True
+
             if email and (not user.email or user.email != email.strip().lower()):
                 user.email = email.strip().lower()
                 updated = True
-            if phone_number and (not user.phone_number or user.phone_number != phone_number.strip()):
+            # Only set phone_number if user has none recorded
+            if phone_number and not user.phone_number:
                 user.phone_number = phone_number.strip()
                 updated = True
-            if preferred_language and user.preferred_language != preferred_language:
+            # Only set preferred_language if user has no language preference configured
+            if preferred_language and not user.preferred_language:
                 user.preferred_language = preferred_language
                 updated = True
             if updated:
                 await self.session.flush()
             return user
 
+        initial_name = display_name or fallback_display_name
         new_user = User(
             id=uuid.uuid4(),
             auth_provider="clerk",
             auth_provider_user_id=clerk_id,
-            display_name=display_name.strip() if display_name else None,
+            display_name=initial_name.strip() if initial_name else None,
             email=email.strip().lower() if email else None,
             phone_number=phone_number.strip() if phone_number else None,
             preferred_language=preferred_language or "en",

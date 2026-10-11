@@ -8,6 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import Farms from "./pages/Farms";
 import ScrollToTop from "./components/ScrollToTop";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ErrorBoundary from "./components/ErrorBoundary";
 import { AuthProvider } from "./context/AuthContext";
 import { LanguageProvider } from "./context/LanguageContext";
 
@@ -24,7 +25,8 @@ function App() {
         <AuthProvider>
           <BrowserRouter>
             <ScrollToTop />
-            <Routes>
+            <ErrorBoundary>
+              <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route
@@ -60,6 +62,7 @@ function App() {
                 }
               />
             </Routes>
+            </ErrorBoundary>
           </BrowserRouter>
         </AuthProvider>
       </LanguageProvider>

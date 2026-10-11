@@ -49,9 +49,9 @@ The project focuses on priority crops of national and regional agricultural sign
 
 | Crop | Operational Status | Model Status | Dataset Source |
 | :--- | :--- | :--- | :--- |
-| **Chili Pepper** (*Capsicum annuum*) | **Active in Production** | MobileNetV2 (12 classes, 94.2% test acc) | Deccan Plateau, Krishna River Basin (Mendeley) |
-| **Potato** (*Solanum tuberosum*) | Architecture & Pipeline Ready | Scheduled for retraining | PLDD-UP, Uttar Pradesh |
-| **Groundnut** (*Arachis hypogaea*) | Architecture & Pipeline Ready | Scheduled for retraining | Multi-Crop Disease Dataset, VIT Chennai |
+| **Chili Pepper** (*Capsicum annuum*) | **Active in Production** | MobileNetV2 (6 classes, 87.85% test acc) | Deccan Plateau, Krishna River Basin (Mendeley) |
+| **Potato** (*Solanum tuberosum*) | **Active in Production** | MobileNetV2 (3 classes, 80.11% test acc) | PLDD-UP, Uttar Pradesh |
+| **Groundnut** (*Arachis hypogaea*) | **Active in Production** | MobileNetV2 (6 classes, 96.27% test acc) | Multi-Crop Disease Dataset, VIT Chennai |
 | **Rice** (*Oryza sativa*) | Cataloged | Scheduled for training | Kaggle Rice Leaf Disease Dataset |
 | **Tomato** (*Solanum lycopersicum*) | Cataloged | Lab baseline comparison | PlantVillage baseline |
 | **Banana** (*Musa acuminata*) | Cataloged | Scheduled for training | Multi-Crop Disease Dataset, Mendeley |

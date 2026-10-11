@@ -22,7 +22,7 @@
 | **Week 10** | Milestone 9 | **Farm Plot Context & Open-Meteo Agro-Weather** | **Completed** | • Built Farm profile management (`backend/routers/farms.py` and `frontend/src/pages/Farms.jsx`).<br>• Integrated Open-Meteo REST API (`services/weather_service.py`) with 30-min in-memory cache.<br>• Implemented GPS auto-locate and weather snapshots for farm plots. |
 | **Week 11** | Milestone 10 | **Groq Advisory, Multi-Key Rotation & PDF Reports** | **Completed** | • Integrated Groq LLM (`openai/gpt-oss-120b`) in `services/llm_service.py`.<br>• Implemented 3-key auto-failover (`GROQ_API_KEY_1/2/3`) for HTTP 429 rate limits.<br>• Added localized offline agronomic fallback report.<br>• Built ReportLab multilingual PDF engine (`services/pdf_service.py`) with Noto fonts. |
 | **Week 12** | Milestone 11 | **Full Trilingual Localization & Profile Management** | **Completed** | • Complete translation dictionaries in `en.js`, `hi.js`, `gu.js`.<br>• Localized all forms (Add/Edit Farm, Profile, Diagnosis) and scan modals.<br>• Implemented Profile Editing (`PATCH /api/v1/auth/profile`) with phone normalization.<br>• Created logout confirmation dialog (`LogoutConfirmModal.jsx`). |
-| **Post-W12** | Milestone 12 | **Model Expansion for Remaining Priority Crops** | **Planned / Next Steps** | • Complete Colab training pipeline runs for Potato (PLDD-UP) and Groundnut.<br>• Serialize `potato_mobilenetv2.keras` and `groundnut_mobilenetv2.keras`.<br>• Validate out-of-distribution field generalization. |
+| **Post-W12** | Milestone 12 | **Multi-Crop Expansion (Potato & Groundnut) & Profile Bug Fix** | **Completed** | • Integrated trained MobileNetV2 models for Potato (3 classes: Early Blight, Late Blight, Healthy) and Groundnut (6 classes: Early/Late Leaf Spot, Rust, Nutrition Deficiency).<br>• Standardized clinical taxonomy (expanded abbreviations EB/LB to Early Blight and Late Blight).<br>• Repaired profile persistence bug in Dashboard state and auth sync clobbering.<br>• Seeded all 23 crop-disease relational rows into PostgreSQL database. |
 | **Post-W12** | Milestone 13 | **Lab vs. Field Domain Shift Benchmark Study** | **Planned / Next Steps** | • Empirical evaluation comparing PlantVillage lab models against field datasets (Tomato/Rice).<br>• Generate comparative confusion matrix report for academic defense. |
 
 ---
@@ -30,5 +30,5 @@
 ## 2. Checkpoint Review & Status Verification
 
 - **Production Core**: Fully operational and passing all integration tests (database, inference, profile management, Groq multi-key rotation, PDF export, frontend production build).
-- **Active ML Model**: Chili model (`chili_mobilenetv2.keras`) is fully integrated and serving live predictions.
-- **Pipeline Ready**: Colab training pipeline (`notebooks/train_crop_model.ipynb`) is ready for execution on additional crop datasets as GPU compute permits.
+- **Active ML Models**: Chili (`chili_mobilenetv2.keras`), Potato (`potato_mobilenetv2.keras`), and Groundnut (`groundnut_mobilenetv2_model_2.keras`) are fully integrated and serving live predictions.
+- **Pipeline Ready**: Colab training pipeline (`notebooks/train_crop_model.ipynb`) is ready for execution on additional cataloged crop datasets (Rice, Tomato, Banana, Soybean).

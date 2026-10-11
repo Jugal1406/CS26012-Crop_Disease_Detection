@@ -33,6 +33,10 @@ from unittest.mock import patch
 # Windows stdout encoding safeguard
 sys.stdout.reconfigure(encoding="utf-8")
 
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if BASE_DIR not in sys.path:
+    sys.path.insert(0, BASE_DIR)
+
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -638,8 +642,9 @@ async def run_all_tests():
         # -------------------------------------------------------------------
         try:
             # Verify frontend scanService export and contract matches backend route
+            repo_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
             frontend_service_path = os.path.join(
-                os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                repo_root,
                 "frontend",
                 "src",
                 "services",

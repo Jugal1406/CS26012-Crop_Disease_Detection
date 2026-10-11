@@ -1,0 +1,286 @@
+{
+  "crop": "groundnut",
+  "run": "model_2",
+  "arch": "MobileNetV2",
+  "framework": "tensorflow 2.21.0",
+  "class_names": [
+    "groundnut_early_leaf_spot",
+    "groundnut_early_rust",
+    "groundnut_healthy",
+    "groundnut_late_leaf_spot",
+    "groundnut_nutrition_deficiency",
+    "groundnut_rust"
+  ],
+  "img_size": 224,
+  "input": "RGB, float32, pixel values 0-255, shape (1, 224, 224, 3); the model rescales internally",
+  "resize": "center-crop to a square, then resize to img_size (bilinear)",
+  "trained_at": "2026-10-10T18:19:50",
+  "seed": 42,
+  "split": [
+    0.7,
+    0.15,
+    0.15
+  ],
+  "dup_threshold": 5,
+  "batch_size": 32,
+  "head_epochs": 30,
+  "head_lr": 0.001,
+  "finetune_epochs": 0,
+  "finetune_lr": 1e-05,
+  "source_pre_split": false,
+  "dedup": "greedy pHash, orientation-aware (8 flips/rotations)",
+  "split_method": "stratified, group-aware (augmented copies of one source photo kept in one split)",
+  "images_original": 8459,
+  "images_clean": 7349,
+  "images_removed": 1110,
+  "distinct_source_photos": 7349,
+  "split_counts": {
+    "test": {
+      "groundnut_early_leaf_spot": 165,
+      "groundnut_early_rust": 181,
+      "groundnut_healthy": 44,
+      "groundnut_late_leaf_spot": 270,
+      "groundnut_nutrition_deficiency": 223,
+      "groundnut_rust": 216
+    },
+    "train": {
+      "groundnut_early_leaf_spot": 774,
+      "groundnut_early_rust": 851,
+      "groundnut_healthy": 210,
+      "groundnut_late_leaf_spot": 1261,
+      "groundnut_nutrition_deficiency": 1045,
+      "groundnut_rust": 1010
+    },
+    "valid": {
+      "groundnut_early_leaf_spot": 165,
+      "groundnut_early_rust": 181,
+      "groundnut_healthy": 44,
+      "groundnut_late_leaf_spot": 270,
+      "groundnut_nutrition_deficiency": 223,
+      "groundnut_rust": 216
+    }
+  },
+  "class_weight": {
+    "groundnut_early_leaf_spot": 1.109,
+    "groundnut_early_rust": 1.009,
+    "groundnut_healthy": 4.088,
+    "groundnut_late_leaf_spot": 0.681,
+    "groundnut_nutrition_deficiency": 0.822,
+    "groundnut_rust": 0.85
+  },
+  "best_epoch": 20,
+  "best_val_acc": 0.973612368106842,
+  "test_acc": 0.9626933575978162,
+  "train_time_s": 352.9,
+  "history": {
+    "accuracy": [
+      0.7507280111312866,
+      0.8980780243873596,
+      0.9246748089790344,
+      0.9277809858322144,
+      0.9370995759963989,
+      0.9409823417663574,
+      0.943506121635437,
+      0.9470005631446838,
+      0.9477771520614624,
+      0.953018844127655,
+      0.9545719027519226,
+      0.9553484916687012,
+      0.9574840068817139,
+      0.9563191533088684,
+      0.9532129764556885,
+      0.9563191533088684,
+      0.9559308886528015,
+      0.961560845375061,
+      0.9602019190788269,
+      0.962531566619873,
+      0.9609784483909607,
+      0.9582605361938477,
+      0.9578722715377808,
+      0.9617549777030945,
+      0.9590370655059814
+    ],
+    "loss": [
+      0.7115231156349182,
+      0.280330091714859,
+      0.2141396403312683,
+      0.18404808640480042,
+      0.16523964703083038,
+      0.1534738391637802,
+      0.14229997992515564,
+      0.12996935844421387,
+      0.12058210372924805,
+      0.1253235787153244,
+      0.11465010046958923,
+      0.1127462238073349,
+      0.10938144475221634,
+      0.10634807497262955,
+      0.10738509148359299,
+      0.10567483305931091,
+      0.10400840640068054,
+      0.09873776137828827,
+      0.09993454068899155,
+      0.0943644568324089,
+      0.0921529084444046,
+      0.09856444597244263,
+      0.09268370270729065,
+      0.0947059839963913,
+      0.09454437345266342
+    ],
+    "val_accuracy": [
+      0.8880800604820251,
+      0.9117379188537598,
+      0.9226569533348083,
+      0.9353958368301392,
+      0.9390354752540588,
+      0.9590536952018738,
+      0.960873544216156,
+      0.9390354752540588,
+      0.9417652487754822,
+      0.9508644342422485,
+      0.9626933336257935,
+      0.960873544216156,
+      0.9699727296829224,
+      0.9617834687232971,
+      0.9645131826400757,
+      0.9663330316543579,
+      0.9717925190925598,
+      0.9708825945854187,
+      0.9699727296829224,
+      0.973612368106842,
+      0.9690628051757812,
+      0.9554139971733093,
+      0.9681528806686401,
+      0.9554139971733093,
+      0.9599636197090149
+    ],
+    "val_loss": [
+      0.3547133207321167,
+      0.2889355719089508,
+      0.24737265706062317,
+      0.20128265023231506,
+      0.19060173630714417,
+      0.15073874592781067,
+      0.13822700083255768,
+      0.16809017956256866,
+      0.1822395920753479,
+      0.15768270194530487,
+      0.12815210223197937,
+      0.13809624314308167,
+      0.12335729598999023,
+      0.13059420883655548,
+      0.12239222228527069,
+      0.11004903167486191,
+      0.09443873167037964,
+      0.10320397466421127,
+      0.10067738592624664,
+      0.09456172585487366,
+      0.10778757184743881,
+      0.13480819761753082,
+      0.10206114500761032,
+      0.12739954888820648,
+      0.13219717144966125
+    ]
+  },
+  "test_report": {
+    "groundnut_early_leaf_spot": {
+      "precision": 0.8870056497175142,
+      "recall": 0.9515151515151515,
+      "f1-score": 0.9181286549707602,
+      "support": 165.0
+    },
+    "groundnut_early_rust": {
+      "precision": 1.0,
+      "recall": 0.9723756906077348,
+      "f1-score": 0.9859943977591037,
+      "support": 181.0
+    },
+    "groundnut_healthy": {
+      "precision": 0.9166666666666666,
+      "recall": 1.0,
+      "f1-score": 0.9565217391304348,
+      "support": 44.0
+    },
+    "groundnut_late_leaf_spot": {
+      "precision": 0.976,
+      "recall": 0.9037037037037037,
+      "f1-score": 0.9384615384615385,
+      "support": 270.0
+    },
+    "groundnut_nutrition_deficiency": {
+      "precision": 0.9866071428571429,
+      "recall": 0.9910313901345291,
+      "f1-score": 0.9888143176733781,
+      "support": 223.0
+    },
+    "groundnut_rust": {
+      "precision": 0.9642857142857143,
+      "recall": 1.0,
+      "f1-score": 0.9818181818181818,
+      "support": 216.0
+    },
+    "accuracy": 0.9626933575978162,
+    "macro avg": {
+      "precision": 0.9550941955878397,
+      "recall": 0.9697709893268532,
+      "f1-score": 0.9616231383022328,
+      "support": 1099.0
+    },
+    "weighted avg": {
+      "precision": 0.9640658532116291,
+      "recall": 0.9626933575978162,
+      "f1-score": 0.9626989136349576,
+      "support": 1099.0
+    }
+  },
+  "confusion_matrix": [
+    [
+      157,
+      0,
+      0,
+      6,
+      2,
+      0
+    ],
+    [
+      0,
+      176,
+      0,
+      0,
+      0,
+      5
+    ],
+    [
+      0,
+      0,
+      44,
+      0,
+      0,
+      0
+    ],
+    [
+      19,
+      0,
+      3,
+      244,
+      1,
+      3
+    ],
+    [
+      1,
+      0,
+      1,
+      0,
+      221,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      216
+    ]
+  ]
+}

@@ -109,8 +109,10 @@ try:
         data.get("status") == "running"
         and data.get("api_version") == "1.0.0"
         and data.get("models", {}).get("chili") == "loaded"
+        and data.get("models", {}).get("groundnut") == "loaded"
+        and data.get("models", {}).get("potato") == "loaded"
     )
-    check("v1 health returns status='running', api_version='1.0.0', chili='loaded'", ok, str(data))
+    check("v1 health returns status='running', api_version='1.0.0', all 3 models loaded", ok, str(data))
 except Exception as exc:
     check("v1 health reachable", False, str(exc))
 
@@ -124,6 +126,8 @@ try:
     ok = (
         data.get("status") == "running"
         and data.get("models", {}).get("chili") == "loaded"
+        and data.get("models", {}).get("groundnut") == "loaded"
+        and data.get("models", {}).get("potato") == "loaded"
     )
     check("Legacy health check alias works seamlessly", ok, str(data))
 except Exception as exc:
@@ -199,25 +203,25 @@ except Exception as exc:
 
 
 # ---------------------------------------------------------------------------
-print("\n[6] POST /api/v1/predict - potato (unsupported crop, no model)")
+print("\n[6] POST /api/v1/predict - potato (supported crop, real model inference)")
 # ---------------------------------------------------------------------------
 try:
     code, data = post_predict("/api/v1/predict", "potato", VALID_JPEG)
-    ok = code == 503 and data.get("status") == "model_unavailable" and "message" in data
-    check("Returns HTTP 503 with status='model_unavailable'", ok, f"HTTP {code}: {data}")
+    ok = code == 200 and data.get("crop") == "potato" and "is_confident" in data
+    check("Potato prediction succeeds with HTTP 200", ok, f"HTTP {code}: {data}")
 except Exception as exc:
-    check("Potato unsupported crop", False, str(exc))
+    check("Potato prediction", False, str(exc))
 
 
 # ---------------------------------------------------------------------------
-print("\n[7] POST /api/v1/predict - groundnut (unsupported crop, no model)")
+print("\n[7] POST /api/v1/predict - groundnut (supported crop, real model inference)")
 # ---------------------------------------------------------------------------
 try:
     code, data = post_predict("/api/v1/predict", "groundnut", VALID_JPEG)
-    ok = code == 503 and data.get("status") == "model_unavailable" and "message" in data
-    check("Returns HTTP 503 with status='model_unavailable'", ok, f"HTTP {code}: {data}")
+    ok = code == 200 and data.get("crop") == "groundnut" and "is_confident" in data
+    check("Groundnut prediction succeeds with HTTP 200", ok, f"HTTP {code}: {data}")
 except Exception as exc:
-    check("Groundnut unsupported crop", False, str(exc))
+    check("Groundnut prediction", False, str(exc))
 
 
 # ---------------------------------------------------------------------------

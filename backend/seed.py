@@ -56,7 +56,7 @@ CROPS = [
         "display_name_hi": "आलू",
         "display_name_gu": "બટેટા",
         "model_key": "potato",
-        "is_supported": False,
+        "is_supported": True,
     },
     {
         "id": 3,
@@ -65,7 +65,7 @@ CROPS = [
         "display_name_hi": "मूंगफली",
         "display_name_gu": "મગફળી",
         "model_key": "groundnut",
-        "is_supported": False,
+        "is_supported": True,
     },
     {
         "id": 4,
@@ -114,9 +114,9 @@ CROPS = [
     },
 ]
 
-# Chili disease classes — derived from the trained MobileNetV2 label dictionary.
-# Other crops will be added when their models are trained and promoted.
+# Disease classes derived from the trained MobileNetV2 label dictionaries.
 DISEASES = [
+    # ---------------- Chili (crop_id: 1) ----------------
     {
         "crop_id": 1,
         "label": "Bacterial Spot",
@@ -165,21 +165,190 @@ DISEASES = [
         "severity": "medium",
         "is_healthy": False,
     },
+
+    # ---------------- Potato (crop_id: 2) ----------------
+    {
+        "crop_id": 2,
+        "label": "Early Blight",
+        "display_name": "Potato Early Blight",
+        "description": "Early blight caused by Alternaria solani produces brown-to-black spots with concentric rings (target board pattern) on older leaves.",
+        "severity": "medium",
+        "is_healthy": False,
+    },
+    {
+        "crop_id": 2,
+        "label": "EB",
+        "display_name": "Potato Early Blight",
+        "description": "Early blight caused by Alternaria solani produces brown-to-black spots with concentric rings (target board pattern) on older leaves.",
+        "severity": "medium",
+        "is_healthy": False,
+    },
+    {
+        "crop_id": 2,
+        "label": "Healthy",
+        "display_name": "Healthy Potato Leaf",
+        "description": "Normal vigorous green potato foliage with no visible foliar lesions, spots, or blight.",
+        "severity": "none",
+        "is_healthy": True,
+    },
+    {
+        "crop_id": 2,
+        "label": "Late Blight",
+        "display_name": "Potato Late Blight",
+        "description": "Late blight caused by Phytophthora infestans causes water-soaked, dark lesions expanding rapidly under cool, wet conditions.",
+        "severity": "high",
+        "is_healthy": False,
+    },
+    {
+        "crop_id": 2,
+        "label": "LB",
+        "display_name": "Potato Late Blight",
+        "description": "Late blight caused by Phytophthora infestans causes water-soaked, dark lesions expanding rapidly under cool, wet conditions.",
+        "severity": "high",
+        "is_healthy": False,
+    },
+
+    # ---------------- Groundnut (crop_id: 3) ----------------
+    {
+        "crop_id": 3,
+        "label": "Early Leaf Spot",
+        "display_name": "Groundnut Early Leaf Spot",
+        "description": "Early leaf spot caused by Passalora arachidicola causes circular brown spots with prominent yellow halos on leaflet surfaces.",
+        "severity": "medium",
+        "is_healthy": False,
+    },
+    {
+        "crop_id": 3,
+        "label": "groundnut_early_leaf_spot",
+        "display_name": "Groundnut Early Leaf Spot",
+        "description": "Early leaf spot caused by Passalora arachidicola causes circular brown spots with prominent yellow halos on leaflet surfaces.",
+        "severity": "medium",
+        "is_healthy": False,
+    },
+    {
+        "crop_id": 3,
+        "label": "Early Rust",
+        "display_name": "Groundnut Early Rust",
+        "description": "Early rust infection phase on groundnut characterized by initial orange-brown pustules on the lower epidermis.",
+        "severity": "medium",
+        "is_healthy": False,
+    },
+    {
+        "crop_id": 3,
+        "label": "groundnut_early_rust",
+        "display_name": "Groundnut Early Rust",
+        "description": "Early rust infection phase on groundnut characterized by initial orange-brown pustules on the lower epidermis.",
+        "severity": "medium",
+        "is_healthy": False,
+    },
+    {
+        "crop_id": 3,
+        "label": "Healthy Leaf",
+        "display_name": "Healthy Groundnut Leaf",
+        "description": "Vigorous green groundnut leaflets with uniform color and no visible fungal pustules or lesions.",
+        "severity": "none",
+        "is_healthy": True,
+    },
+    {
+        "crop_id": 3,
+        "label": "groundnut_healthy",
+        "display_name": "Healthy Groundnut Leaf",
+        "description": "Vigorous green groundnut leaflets with uniform color and no visible fungal pustules or lesions.",
+        "severity": "none",
+        "is_healthy": True,
+    },
+    {
+        "crop_id": 3,
+        "label": "Late Leaf Spot",
+        "display_name": "Groundnut Late Leaf Spot",
+        "description": "Late leaf spot caused by Nothopassalora personata produces darker brown-to-black circular spots without prominent halos.",
+        "severity": "high",
+        "is_healthy": False,
+    },
+    {
+        "crop_id": 3,
+        "label": "groundnut_late_leaf_spot",
+        "display_name": "Groundnut Late Leaf Spot",
+        "description": "Late leaf spot caused by Nothopassalora personata produces darker brown-to-black circular spots without prominent halos.",
+        "severity": "high",
+        "is_healthy": False,
+    },
+    {
+        "crop_id": 3,
+        "label": "Nutrition Deficiency",
+        "display_name": "Groundnut Nutrient Deficiency",
+        "description": "Nutrient deficiency symptoms including chlorosis, leaf paling, or marginal yellowing across foliage.",
+        "severity": "low",
+        "is_healthy": False,
+    },
+    {
+        "crop_id": 3,
+        "label": "groundnut_nutrition_deficiency",
+        "display_name": "Groundnut Nutrient Deficiency",
+        "description": "Nutrient deficiency symptoms including chlorosis, leaf paling, or marginal yellowing across foliage.",
+        "severity": "low",
+        "is_healthy": False,
+    },
+    {
+        "crop_id": 3,
+        "label": "Rust",
+        "display_name": "Groundnut Rust",
+        "description": "Foliar rust caused by Puccinia arachidis producing numerous reddish-brown pustules leading to premature defoliation.",
+        "severity": "high",
+        "is_healthy": False,
+    },
+    {
+        "crop_id": 3,
+        "label": "groundnut_rust",
+        "display_name": "Groundnut Rust",
+        "description": "Foliar rust caused by Puccinia arachidis producing numerous reddish-brown pustules leading to premature defoliation.",
+        "severity": "high",
+        "is_healthy": False,
+    },
 ]
 
-# Chili V1 — the current production baseline model
+# Model versions registry — Chili, Potato, and Groundnut production models
 MODEL_VERSIONS = [
     {
         "crop_id": 1,
         "version_tag": "v1.0.0",
         "architecture": "MobileNetV2",
-        "artifact_path": "models/chili/v1.0.0",
+        "artifact_path": "models/chili_mobilenetv2.keras",
         "num_classes": 6,
-        "test_accuracy": None,   # To be updated after formal evaluation
+        "test_accuracy": 0.8785,
         "notes": (
             "Chili V1 — production baseline. "
             "MobileNetV2 transfer learning on field-collected chili dataset. "
-            "6 classes: Healthy, Leaf Curl, Leaf Spot, Whitefly, Yellowish, Anthracnose."
+            "6 classes: Bacterial Spot, Cercospora Leaf Spot, Curl Virus, Healthy Leaf, Nutrition Deficiency, White spot. "
+            "Test accuracy: 87.85%."
+        ),
+        "is_active": True,
+    },
+    {
+        "crop_id": 2,
+        "version_tag": "v1.0.0",
+        "architecture": "MobileNetV2",
+        "artifact_path": "models/potato_mobilenetv2.keras",
+        "num_classes": 3,
+        "test_accuracy": 0.8011,
+        "notes": (
+            "Potato V1 MobileNetV2 transfer learning model. "
+            "3 classes: Early Blight (EB), Healthy, Late Blight (LB). "
+            "Test accuracy: 80.11% on held-out test split."
+        ),
+        "is_active": True,
+    },
+    {
+        "crop_id": 3,
+        "version_tag": "v1.0.0",
+        "architecture": "MobileNetV2",
+        "artifact_path": "models/groundnut_mobilenetv2_model_2.keras",
+        "num_classes": 6,
+        "test_accuracy": 0.9627,
+        "notes": (
+            "Groundnut V1 (model_2) MobileNetV2 transfer learning model. "
+            "6 classes: early leaf spot, early rust, healthy, late leaf spot, nutrition deficiency, rust. "
+            "Test accuracy: 96.27% on held-out test split."
         ),
         "is_active": True,
     },
@@ -201,11 +370,16 @@ async def seed_crops(session: AsyncSession) -> None:
                 VALUES
                     (:id, :name, :display_name, :display_name_hi, :display_name_gu,
                      :model_key, :is_supported, NOW())
-                ON CONFLICT (name) DO NOTHING
+                ON CONFLICT (name) DO UPDATE SET
+                    is_supported = EXCLUDED.is_supported,
+                    display_name = EXCLUDED.display_name,
+                    display_name_hi = EXCLUDED.display_name_hi,
+                    display_name_gu = EXCLUDED.display_name_gu,
+                    model_key = EXCLUDED.model_key
             """),
             crop,
         )
-    print(f"  [OK] {len(CROPS)} crop rows processed (skipped if already exist).")
+    print(f"  [OK] {len(CROPS)} crop rows processed.")
 
 
 async def seed_diseases(session: AsyncSession) -> None:

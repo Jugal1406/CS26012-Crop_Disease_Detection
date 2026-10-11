@@ -1,0 +1,17 @@
+{
+  "crop": "groundnut",
+  "run": "model_2",
+  "arch": "MobileNetV2",
+  "framework": "tensorflow 2.21.0",
+  "class_names": [
+    "groundnut_early_leaf_spot",
+    "groundnut_early_rust",
+    "groundnut_healthy",
+    "groundnut_late_leaf_spot",
+    "groundnut_nutrition_deficiency",
+    "groundnut_rust"
+  ],
+  "img_size": 224,
+  "input": "RGB, float32, pixel values 0-255, shape (1, 224, 224, 3); the model rescales internally",
+  "resize": "center-crop to a square, then resize to img_size (bilinear)"
+}

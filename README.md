@@ -21,18 +21,23 @@ This project addresses that gap by:
 
 ## 2. Supported Crops & Model Status
 
-| Crop | Status | Classes | Model Architecture | Training Data Origin |
-| :--- | :--- | :---: | :--- | :--- |
-| **Chili Pepper** | **Active & Deployed** | 12 | MobileNetV2 Transfer Learning (`.keras`) | Field images · Krishna River Basin, Deccan Plateau (Mendeley) |
-| **Potato** | Pipeline Ready | 3 | MobileNetV2 (Scheduled for retraining) | Field images · PLDD-UP, Uttar Pradesh |
-| **Groundnut** | Pipeline Ready | 4 | MobileNetV2 (Scheduled for retraining) | Field images · VIT Chennai dataset |
-| **Rice** | Planned | 4 | MobileNetV2 (Dataset cataloged) | Field images · Kaggle Rice Leaf Disease |
-| **Tomato** | Planned | 10 | MobileNetV2 (Lab baseline evaluation) | PlantVillage comparison baseline |
-| **Wheat** | Planned | — | Under dataset acquisition | Field images · North Indian wheat plots |
-| **Banana** | Planned | 4 | MobileNetV2 (Dataset cataloged) | Multi-Crop Disease Dataset, Mendeley |
-| **Soybean** | Planned | 4 | MobileNetV2 (Dataset cataloged) | MH-SoyaHealthVision (leaf subset) |
+| Crop | Status | Classes | Model Artifact | Test Accuracy | Training Data Origin |
+| :--- | :--- | :---: | :--- | :---: | :--- |
+| **Chili Pepper** | **Active & Deployed** | 6 | `chili_mobilenetv2.keras` | 87.85% | Field images · Krishna River Basin, Deccan Plateau (Mendeley) |
+| **Potato** | **Active & Deployed** | 3 | `potato_mobilenetv2.keras` | 80.11% | Field images · PLDD-UP, Uttar Pradesh |
+| **Groundnut** | **Active & Deployed** | 6 | `groundnut_mobilenetv2_model_2.keras` | 96.27% | Field images · VIT Chennai dataset |
+| **Rice** | Planned | 4 | MobileNetV2 (Dataset cataloged) | — | Field images · Kaggle Rice Leaf Disease |
+| **Tomato** | Planned | 10 | MobileNetV2 (Lab baseline evaluation) | — | PlantVillage comparison baseline |
+| **Wheat** | Planned | — | Under dataset acquisition | — | Field images · North Indian wheat plots |
+| **Banana** | Planned | 4 | MobileNetV2 (Dataset cataloged) | — | Multi-Crop Disease Dataset, Mendeley |
+| **Soybean** | Planned | 4 | MobileNetV2 (Dataset cataloged) | — | MH-SoyaHealthVision (leaf subset) |
 
-> **Note on Model Validation**: The currently deployed Chili model achieves an internal test accuracy of **94.2%** on a held-out test split of 1,200 field images. Real-world field accuracy may vary under extreme lighting, glare, or motion blur, which is managed via the 70% confidence rejection gate.
+### Active Disease Classes & Nomenclature
+- **Chili Pepper (6 classes)**: Healthy Leaf, Leaf Curl, Leaf Spot, Whitefly, Yellow Leaf Curl, Yellowish.
+- **Potato (3 classes)**: Early Blight (full form of training label `EB`), Late Blight (full form of training label `lb`), Healthy.
+- **Groundnut (6 classes)**: Early Leaf Spot (`early_leaf_spot`), Early Rust (`early_rust`), Healthy Leaf (`healthy_leaf`), Late Leaf Spot (`late_leaf_spot`), Nutrition Deficiency (`nutrition_deficiency`), Rust (`rust`).
+
+> **Note on Model Validation**: All three active models utilize a MobileNetV2 backbone (bilinear resize to 224×224, RGB [0, 255] float32 tensors with square center cropping). The application strictly enforces a **70% softmax confidence threshold** to abstain from forced diagnoses when leaf images exhibit ambiguity, extreme glare, or motion blur.
 
 ---
 
@@ -135,9 +140,15 @@ CS26012-Crop_Disease_Detection/
 │       └── styles/                    # Modular Vanilla CSS stylesheets
 │
 ├── models/                            # Trained ML Model Weights & Metadata
-│   ├── chili_mobilenetv2.keras        # Trained Keras MobileNetV2 model
-│   ├── chili_mobilenetv2_meta.json    # Class label mappings & input specs
-│   └── chili_mobilenetv2_metrics.json # Internal validation metrics
+│   ├── chili_mobilenetv2.keras        # Trained Keras MobileNetV2 Chili model (6 classes)
+│   ├── chili_mobilenetv2_meta.json    # Chili class label mappings & input specs
+│   ├── chili_mobilenetv2_metrics.json # Chili validation metrics (87.85% test acc)
+│   ├── groundnut_mobilenetv2_model_2.keras # Trained Groundnut model (6 classes)
+│   ├── groundnut_mobilenetv2_model_2_meta.json # Groundnut class label mappings
+│   ├── groundnut_mobilenetv2_model_2_metrics.json # Groundnut validation metrics (96.27% test acc)
+│   ├── potato_mobilenetv2.keras       # Trained Potato model (3 classes: Early Blight, Late Blight, Healthy)
+│   ├── potato_mobilenetv2_meta.json   # Potato class label mappings
+│   └── potato_mobilenetv2_metrics.json # Potato validation metrics (80.11% test acc)
 │
 ├── notebooks/                         # ML Training Pipelines
 │   └── train_crop_model.ipynb         # 10-phase transfer learning Colab notebook

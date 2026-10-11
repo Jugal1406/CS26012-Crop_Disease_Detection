@@ -42,19 +42,16 @@ class AuthService:
         token_name = clerk_profile.get("display_name") if clerk_profile else None
         phone = clerk_profile.get("phone_number") if clerk_profile else None
 
-        # Display name priority: client explicit form name > Clerk profile name
-        final_display_name = (
-            display_name.strip()
-            if display_name and display_name.strip()
-            else token_name
-        )
+        # Display name priority: explicit client request vs Clerk profile name fallback
+        explicit_name = display_name.strip() if display_name and display_name.strip() else None
 
         user = await self.user_repo.sync_clerk_user(
             clerk_id=clerk_id,
-            display_name=final_display_name,
+            display_name=explicit_name,
             email=email,
             phone_number=phone,
             preferred_language=preferred_language,
+            fallback_display_name=token_name,
         )
 
         return {

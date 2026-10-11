@@ -153,9 +153,9 @@ export default function Diagnose() {
                   }}
                   className="diag-select"
                 >
-                  <option value="chili">🌶️ Chili Pepper ({t("diagnose.statusConfident", "Active")})</option>
-                  <option value="potato" disabled>🥔 Potato</option>
-                  <option value="groundnut" disabled>🥜 Groundnut</option>
+                  <option value="chili">🌶️ {t("crops.chili", "Chili Pepper")} ({t("diagnose.statusConfident", "Active")})</option>
+                  <option value="potato">🥔 {t("crops.potato", "Potato")} ({t("diagnose.statusConfident", "Active")})</option>
+                  <option value="groundnut">🥜 {t("crops.groundnut", "Groundnut")} ({t("diagnose.statusConfident", "Active")})</option>
                 </select>
               </div>
 

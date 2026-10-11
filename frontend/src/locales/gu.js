@@ -18,6 +18,11 @@ export const gu = {
     status: "સ્થિતિ",
     agroWeatherBadge: "કૃષિ હવામાન",
   },
+  crops: {
+    chili: "મરચું",
+    potato: "બટાટા",
+    groundnut: "મગફળી",
+  },
   nav: {
     home: "મુખ્ય પૃષ્ઠ",
     howItWorks: "કાર્યપદ્ધતિ",

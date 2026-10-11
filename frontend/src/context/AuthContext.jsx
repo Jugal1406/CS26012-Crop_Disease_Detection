@@ -70,7 +70,7 @@ export function AuthProvider({ children }) {
     }
 
     if (isSignedIn && clerkUser) {
-      syncWithBackend(clerkUser.fullName || null).finally(() => {
+      syncWithBackend().finally(() => {
         setLoading(false);
       });
     } else {

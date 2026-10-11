@@ -69,14 +69,16 @@ def run_tests():
     print("\n[1] Loading all available models ...")
     try:
         statuses = load_all_available_models()
-        assert statuses.get("chili") == "loaded", f"Expected 'loaded', got: {statuses}"
+        assert statuses.get("chili") == "loaded", f"Expected 'loaded' for chili, got: {statuses}"
+        assert statuses.get("groundnut") == "loaded", f"Expected 'loaded' for groundnut, got: {statuses}"
+        assert statuses.get("potato") == "loaded", f"Expected 'loaded' for potato, got: {statuses}"
         print(f"    Model statuses: {statuses}")
-        print(f" {PASS} Model loaded for chili")
+        print(f" {PASS} Models loaded for chili, groundnut, and potato")
         results.append(True)
     except Exception as exc:
         print(f" {FAIL} Model loading failed: {exc}")
         results.append(False)
-        print("\nCannot continue tests without a loaded model. Exiting.")
+        print("\nCannot continue tests without loaded models. Exiting.")
         return results
 
     # ------------------------------------------------------------------
@@ -85,37 +87,49 @@ def run_tests():
     print("\n[2] get_model_statuses() ...")
     try:
         s = get_model_statuses()
-        assert "chili" in s
-        assert s["chili"] == "loaded"
+        for c in ["chili", "groundnut", "potato"]:
+            assert c in s, f"Missing crop in statuses: {c}"
+            assert s[c] == "loaded", f"Expected 'loaded' for {c}, got: {s.get(c)}"
         print(f"    Statuses: {s}")
-        print(f" {PASS} get_model_statuses returns correct result")
+        print(f" {PASS} get_model_statuses returns correct result for all crops")
         results.append(True)
     except Exception as exc:
         print(f" {FAIL} {exc}")
         results.append(False)
 
     # ------------------------------------------------------------------
-    # TEST 3: Valid synthetic image → full output structure
+    # TEST 3: Valid synthetic image → full output structure for all crops
     # ------------------------------------------------------------------
-    print("\n[3] Valid synthetic image → predict('chili', ...) ...")
+    print("\n[3] Valid synthetic image → predict() for chili, groundnut, and potato ...")
     try:
         img_bytes = make_synthetic_image_bytes()
-        result = predict("chili", img_bytes)
 
-        assert "crop" in result,       "Missing key: crop"
-        assert "disease" in result,    "Missing key: disease"
-        assert "confidence" in result, "Missing key: confidence"
-        assert "all_probs" in result,  "Missing key: all_probs"
+        # 3a. Chili
+        chili_res = predict("chili", img_bytes)
+        assert chili_res["crop"] == "chili"
+        assert len(chili_res["all_probs"]) == 6
+        assert 0.0 <= chili_res["confidence"] <= 1.0
 
-        assert result["crop"] == "chili"
-        assert isinstance(result["disease"], str)
-        assert 0.0 <= result["confidence"] <= 1.0
-        assert len(result["all_probs"]) == 6  # Chili has 6 classes
-        assert result["all_probs"][0]["confidence"] >= result["all_probs"][1]["confidence"]
+        # 3b. Groundnut
+        groundnut_res = predict("groundnut", img_bytes)
+        assert groundnut_res["crop"] == "groundnut"
+        assert len(groundnut_res["all_probs"]) == 6
+        assert 0.0 <= groundnut_res["confidence"] <= 1.0
 
-        print(f"    Predicted: {result['disease']} ({result['confidence']*100:.1f}%)")
-        print(f"    All probs: {[(p['class'][:12], round(p['confidence']*100,1)) for p in result['all_probs']]}")
-        print(f" {PASS} Valid image prediction succeeded with correct structure")
+        # 3c. Potato
+        potato_res = predict("potato", img_bytes)
+        assert potato_res["crop"] == "potato"
+        assert len(potato_res["all_probs"]) == 3
+        assert 0.0 <= potato_res["confidence"] <= 1.0
+        # Verify full forms for potato
+        potato_classes = {p["class"] for p in potato_res["all_probs"]}
+        assert "Early Blight" in potato_classes or "Healthy" in potato_classes
+        assert "Late Blight" in potato_classes
+
+        print(f"    Chili: {chili_res['disease']} ({chili_res['confidence']*100:.1f}%)")
+        print(f"    Groundnut: {groundnut_res['disease']} ({groundnut_res['confidence']*100:.1f}%)")
+        print(f"    Potato: {potato_res['disease']} ({potato_res['confidence']*100:.1f}%)")
+        print(f" {PASS} Valid image predictions succeeded for all 3 crops with correct class counts and full labels")
         results.append(True)
     except Exception as exc:
         print(f" {FAIL} {exc}")

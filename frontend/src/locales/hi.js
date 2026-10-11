@@ -18,6 +18,11 @@ export const hi = {
     status: "स्थिति",
     agroWeatherBadge: "कृषि मौसम",
   },
+  crops: {
+    chili: "मिर्च",
+    potato: "आलू",
+    groundnut: "मूंगफली",
+  },
   nav: {
     home: "मुख्य पृष्ठ",
     howItWorks: "कार्यप्रणाली",

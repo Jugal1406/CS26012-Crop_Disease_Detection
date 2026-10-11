@@ -1,5 +1,5 @@
 // frontend/src/pages/Dashboard.jsx
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useTranslation } from "../context/LanguageContext";
@@ -62,57 +62,46 @@ export default function Dashboard({ defaultTab = "overview" }) {
   const [selectedScanId, setSelectedScanId] = useState(null);
 
   // Fetch authenticated personalized overview from backend
-  useEffect(() => {
-    let isMounted = true;
+  const loadDashboard = useCallback(async () => {
+    try {
+      setLoading(true);
+      const token = await getAuthToken();
+      if (!token) return;
 
-    async function fetchDashboard() {
-      try {
-        setLoading(true);
-        const token = await getAuthToken();
-        if (!token) return;
+      const response = await fetch(`${BACKEND_URL}/api/v1/dashboard/overview`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-        const response = await fetch(`${BACKEND_URL}/api/v1/dashboard/overview`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error(`Failed to load dashboard data (HTTP ${response.status})`);
-        }
-
-        const data = await response.json();
-        if (isMounted) {
-          setDashboardData(data);
-          setError(null);
-          if (data.weather) {
-            setWeatherData(data.weather);
-          } else if (data.farm?.has_location) {
-            fetchFarmWeather(data.farm.id)
-              .then((wx) => {
-                if (isMounted && wx.has_location) setWeatherData(wx);
-              })
-              .catch((e) => console.log("Initial weather fetch:", e));
-          }
-        }
-      } catch (err) {
-        console.error("Dashboard overview fetch error:", err);
-        if (isMounted) {
-          setError(err.message);
-        }
-      } finally {
-        if (isMounted) {
-          setLoading(false);
-        }
+      if (!response.ok) {
+        throw new Error(`Failed to load dashboard data (HTTP ${response.status})`);
       }
+
+      const data = await response.json();
+      setDashboardData(data);
+      setError(null);
+      if (data.weather) {
+        setWeatherData(data.weather);
+      } else if (data.farm?.has_location) {
+        fetchFarmWeather(data.farm.id)
+          .then((wx) => {
+            if (wx && wx.has_location) setWeatherData(wx);
+          })
+          .catch((e) => console.log("Initial weather fetch:", e));
+      }
+      return data;
+    } catch (err) {
+      console.error("Dashboard overview fetch error:", err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
     }
+  }, []);
 
-    fetchDashboard();
-
-    return () => {
-      isMounted = false;
-    };
-  }, [user]);
+  useEffect(() => {
+    loadDashboard();
+  }, [user, loadDashboard]);
 
   // Fetch paginated scan history (Module 16) with race condition & stale cancellation protection
   useEffect(() => {
@@ -222,9 +211,21 @@ export default function Dashboard({ defaultTab = "overview" }) {
         changeLanguage(editLanguage);
       }
 
+      if (updated) {
+        setDashboardData((prev) => ({
+          ...prev,
+          user: {
+            ...prev?.user,
+            display_name: updated.display_name,
+            phone_number: updated.phone_number,
+            preferred_language: updated.preferred_language,
+          },
+        }));
+      }
+
+      await loadDashboard();
       setProfileSuccess(t("profile.updateSuccess", "Profile updated successfully!"));
       setIsEditingProfile(false);
-      await loadDashboard();
     } catch (err) {
       console.error("Profile update error:", err);
       setProfileError(err.message || t("profile.updateFailed", "Failed to update profile."));
@@ -829,7 +830,7 @@ export default function Dashboard({ defaultTab = "overview" }) {
                       ))
                     ) : (
                       <div style={{ color: "rgba(243, 239, 228, 0.6)", fontSize: "0.9rem" }}>
-                        Chili (Active), Potato (Active), Groundnut (In Progress)
+                        Chili (Active), Potato (Active), Groundnut (Active)
                       </div>
                     )}
                   </div>
@@ -891,6 +892,7 @@ export default function Dashboard({ defaultTab = "overview" }) {
                     <option value="">🌱 {t("history.allCrops", "All Crops")}</option>
                     <option value="chili">Chili (Mirchi)</option>
                     <option value="potato">Potato (Aloo)</option>
+                    <option value="groundnut">Groundnut (Mungfali)</option>
                   </select>
 
                   {/* Status Filter */}

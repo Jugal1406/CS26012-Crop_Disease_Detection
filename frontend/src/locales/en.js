@@ -18,6 +18,11 @@ export const en = {
     status: "Status",
     agroWeatherBadge: "Agro-Weather",
   },
+  crops: {
+    chili: "Chili Pepper",
+    potato: "Potato",
+    groundnut: "Groundnut",
+  },
   nav: {
     home: "Home",
     howItWorks: "How it works",

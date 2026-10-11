@@ -66,10 +66,10 @@ class DiagnosisService:
         # 1. Normalize and validate crop
         normalized_crop = crop_name.strip().lower()
         crop_entity = await self.crop_repo.get_by_name(normalized_crop)
-        if not crop_entity:
+        if not crop_entity or not crop_entity.is_supported:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
-                detail=f"Unsupported crop '{crop_name}'. Supported crops: chili.",
+                detail=f"Unsupported crop '{crop_name}'. Supported crops: chili, groundnut, potato.",
             )
 
         # 2. Run MobileNetV2 Inference (authoritative)
@@ -186,8 +186,10 @@ class DiagnosisService:
 
         # 7. Accepted Prediction Workflow
         # Look up Disease entity
+        raw_disease_label = result.get("raw_disease", top_disease_label)
         dis_stmt = select(Disease).where(
-            Disease.crop_id == crop_entity.id, Disease.label == top_disease_label
+            Disease.crop_id == crop_entity.id,
+            (Disease.label == top_disease_label) | (Disease.label == raw_disease_label),
         )
         disease_entity = (await self.session.execute(dis_stmt)).scalars().first()
         disease_display_name = (
